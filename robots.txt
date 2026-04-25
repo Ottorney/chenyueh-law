@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ottorney.github.io/chenyueh-law/sitemap.xml
