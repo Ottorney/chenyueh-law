@@ -2777,7 +2777,56 @@ font-family: 'Source Sans Pro'
     <div>
       <div class="contact-item-label">Follow Us</div>
       <div class="contact-item-value" style="margin-bottom:0.8rem;">歡迎追蹤我們的社群</div>
-      <div class="social-icons">
+      <!-- 訪客翻頁計數器 -->
+      <div style="margin-top:1.6rem;">
+        <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--mid-gray);margin-bottom:0.7rem;">VISITORS</div>
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+          <div style="display:flex;gap:3px;" id="uv-flip-display"></div>
+          <span style="font-size:0.65rem;letter-spacing:0.2em;color:var(--mid-gray);margin-left:4px;">人造訪</span>
+        </div>
+      </div>
+      <!-- 不蒜子原始數值容器（隱藏） -->
+      <span id="busuanzi_container_site_uv" style="display:none;">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+      <style>
+        .flip-digit {
+          display:inline-flex;align-items:center;justify-content:center;
+          width:28px;height:38px;background:var(--charcoal);border:1px solid rgba(200,169,110,0.25);
+          border-radius:4px;font-size:1.1rem;font-weight:400;color:var(--gold);
+          font-family:'Courier New',monospace;
+          box-shadow:0 2px 8px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.04);
+          position:relative;overflow:hidden;
+        }
+        .flip-digit::after {
+          content:'';position:absolute;left:0;right:0;top:50%;height:1px;
+          background:rgba(200,169,110,0.15);
+        }
+        @keyframes flipIn {
+          0%{transform:rotateX(-90deg);opacity:0;}
+          100%{transform:rotateX(0deg);opacity:1;}
+        }
+        .flip-digit { animation: flipIn 0.4s ease forwards; }
+      </style>
+      <script>
+        function renderFlipDigits(num) {
+          const display = document.getElementById('uv-flip-display');
+          if (!display) return;
+          const str = String(parseInt(num)||0).padStart(4,'0');
+          display.innerHTML = str.split('').map((d,i) =>
+            `<span class="flip-digit" style="animation-delay:${i*0.08}s">${d}</span>`
+          ).join('');
+        }
+        (function waitBusuanzi() {
+          const el = document.getElementById('busuanzi_value_site_uv');
+          if (el && el.innerText.trim() !== '') {
+            renderFlipDigits(el.innerText.trim());
+          } else {
+            setTimeout(waitBusuanzi, 300);
+          }
+        })();
+      </script>
+      <div class="social-icons" style="margin-top:1.6rem;">
         <!-- Facebook -->
         <a href="https://www.facebook.com/profile.php?id=61573795349019" target="_blank" rel="noopener" class="social-icon" title="Facebook">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -2812,11 +2861,7 @@ font-family: 'Source Sans Pro'
   <div class="footer-logo">晨岳法律事務所</div>
   <div class="footer-motto">Dawn over the Mountain</div>
   <div class="footer-copy">© 2024 晨岳法律事務所 · All Rights Reserved</div>
-  <div style="margin-top:0.8rem;font-size:0.72rem;color:var(--mid-gray);letter-spacing:0.12em;">
-    <span id="busuanzi_container_site_uv">累計訪客 <span id="busuanzi_value_site_uv"></span> 人</span>
-    <span style="margin:0 0.6rem;opacity:0.4;">·</span>
-    <span id="busuanzi_container_site_pv">累計瀏覽 <span id="busuanzi_value_site_pv"></span> 次</span>
-  </div>
+
 </footer>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
