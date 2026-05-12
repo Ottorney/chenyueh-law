@@ -2780,8 +2780,8 @@ font-family: 'Source Sans Pro'
       <div class="contact-item-label">Follow Us</div>
       <div class="contact-item-value" style="margin-bottom:0.8rem;">歡迎追蹤我們的社群</div>
       <!-- 不蒜子原始數值容器（隱藏） -->
-      <span id="busuanzi_container_site_uv" style="position:absolute;opacity:0;pointer-events:none;font-size:0;">
-        <span id="busuanzi_value_site_uv"></span>
+      <span id="busuanzi_container_site_pv" style="position:absolute;opacity:0;pointer-events:none;font-size:0;">
+        <span id="busuanzi_value_site_pv"></span>
       </span>
       <style>
         .flip-digit {
@@ -2812,7 +2812,7 @@ font-family: 'Source Sans Pro'
           ).join('');
         }
         (function waitBusuanzi() {
-          const el = document.getElementById('busuanzi_value_site_uv');
+          const el = document.getElementById('busuanzi_value_site_pv');
           if (el && el.innerText.trim() !== '') {
             renderFlipDigits(el.innerText.trim());
           } else {
@@ -2852,7 +2852,7 @@ font-family: 'Source Sans Pro'
         <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--mid-gray);margin-bottom:0.7rem;">VISITORS</div>
         <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
           <div style="display:flex;gap:3px;" id="uv-flip-display"></div>
-          <span style="font-size:0.65rem;letter-spacing:0.2em;color:var(--mid-gray);margin-left:4px;">人造訪</span>
+          <span style="font-size:0.65rem;letter-spacing:0.2em;color:var(--mid-gray);margin-left:4px;">次瀏覽</span>
         </div>
       </div>
     </div>
