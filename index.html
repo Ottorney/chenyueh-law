@@ -2721,18 +2721,20 @@ font-family: 'Source Sans Pro'
     <p class="section-label">Book Appointment</p>
     <h3 class="section-title" style="font-size:1.4rem;">填寫預約表單</h3>
     <div class="section-line"></div>
-    <div class="form-row">
-      <div class="form-group"><label>姓名 *</label><input type="text" id="f-name" placeholder="您的姓名"></div>
-      <div class="form-group"><label>聯絡電話 *</label><input type="tel" id="f-phone" placeholder="0912-345-678"></div>
-    </div>
-    <div class="form-group"><label>電子信箱</label><input type="email" id="f-email" placeholder="email@example.com"></div>
-    <div class="form-row">
-      <div class="form-group"><label>業務類別 *</label><select id="f-area"><option value="">請選擇</option><option>民事訴訟</option><option>刑事辯護</option><option>家事法律</option><option>企業法務</option><option>不動產法律</option><option>行政救濟</option><option>其他</option></select></div>
-      <div class="form-group"><label>希望諮詢日期</label><input type="date" id="f-date"></div>
-    </div>
-    <div class="form-group"><label>案件簡述</label><textarea id="f-msg" placeholder="請簡要描述您的法律問題，以便安排最適合的諮詢…"></textarea></div>
-    <button class="form-submit" onclick="handleSubmit()">送出預約申請</button>
-    <div class="form-success" id="form-success">✓ 您的預約申請已成功送出，我們將盡快與您聯繫。</div>
+    <form id="appt-form" action="https://formspree.io/f/xykooolb" method="POST">
+      <div class="form-row">
+        <div class="form-group"><label>姓名 *</label><input type="text" id="f-name" name="姓名" placeholder="您的姓名" required></div>
+        <div class="form-group"><label>聯絡電話 *</label><input type="tel" id="f-phone" name="聯絡電話" placeholder="0912-345-678" required></div>
+      </div>
+      <div class="form-group"><label>電子信箱</label><input type="email" id="f-email" name="電子信箱" placeholder="email@example.com"></div>
+      <div class="form-row">
+        <div class="form-group"><label>業務類別 *</label><select id="f-area" name="業務類別" required><option value="">請選擇</option><option>民事訴訟</option><option>刑事辯護</option><option>家事法律</option><option>企業法務</option><option>不動產法律</option><option>行政救濟</option><option>其他</option></select></div>
+        <div class="form-group"><label>希望諮詢日期</label><input type="date" id="f-date" name="希望諮詢日期"></div>
+      </div>
+      <div class="form-group"><label>案件簡述</label><textarea id="f-msg" name="案件簡述" placeholder="請簡要描述您的法律問題，以便安排最適合的諮詢…"></textarea></div>
+      <button type="submit" class="form-submit">送出預約申請</button>
+      <div class="form-success" id="form-success">✓ 您的預約申請已成功送出，我們將盡快與您聯繫。</div>
+    </form>
   </div>
 </section>
 
@@ -2777,14 +2779,6 @@ font-family: 'Source Sans Pro'
     <div>
       <div class="contact-item-label">Follow Us</div>
       <div class="contact-item-value" style="margin-bottom:0.8rem;">歡迎追蹤我們的社群</div>
-      <!-- 訪客翻頁計數器 -->
-      <div style="margin-top:1.6rem;">
-        <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--mid-gray);margin-bottom:0.7rem;">VISITORS</div>
-        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
-          <div style="display:flex;gap:3px;" id="uv-flip-display"></div>
-          <span style="font-size:0.65rem;letter-spacing:0.2em;color:var(--mid-gray);margin-left:4px;">人造訪</span>
-        </div>
-      </div>
       <!-- 不蒜子原始數值容器（隱藏） -->
       <span id="busuanzi_container_site_uv" style="display:none;">
         <span id="busuanzi_value_site_uv"></span>
@@ -2812,7 +2806,7 @@ font-family: 'Source Sans Pro'
         function renderFlipDigits(num) {
           const display = document.getElementById('uv-flip-display');
           if (!display) return;
-          const str = String(parseInt(num)||0).padStart(4,'0');
+          const str = String(parseInt(num)||0).padStart(6,'0');
           display.innerHTML = str.split('').map((d,i) =>
             `<span class="flip-digit" style="animation-delay:${i*0.08}s">${d}</span>`
           ).join('');
@@ -2826,7 +2820,7 @@ font-family: 'Source Sans Pro'
           }
         })();
       </script>
-      <div class="social-icons" style="margin-top:1.6rem;">
+      <div class="social-icons" style="margin-top:0.5rem;">
         <!-- Facebook -->
         <a href="https://www.facebook.com/profile.php?id=61573795349019" target="_blank" rel="noopener" class="social-icon" title="Facebook">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -2853,6 +2847,14 @@ font-family: 'Source Sans Pro'
           官方
         </a>
       </div>
+      <!-- 訪客翻頁計數器 -->
+      <div style="margin-top:1.4rem;">
+        <div style="font-size:0.65rem;letter-spacing:0.3em;color:var(--mid-gray);margin-bottom:0.7rem;">VISITORS</div>
+        <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+          <div style="display:flex;gap:3px;" id="uv-flip-display"></div>
+          <span style="font-size:0.65rem;letter-spacing:0.2em;color:var(--mid-gray);margin-left:4px;">人造訪</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2869,14 +2871,35 @@ font-family: 'Source Sans Pro'
   const reveals=document.querySelectorAll('.reveal');
   const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
   reveals.forEach(r=>observer.observe(r));
-  function handleSubmit(){
-    const name=document.getElementById('f-name').value.trim();
-    const phone=document.getElementById('f-phone').value.trim();
-    const area=document.getElementById('f-area').value;
-    if(!name||!phone||!area){alert('請填寫必填欄位（姓名、聯絡電話、業務類別）');return;}
-    document.getElementById('form-success').style.display='block';
-    document.querySelector('.form-submit').disabled=true;
-    document.querySelector('.form-submit').style.opacity='0.5';
+  // Formspree AJAX 送出
+  const apptForm = document.getElementById('appt-form');
+  if(apptForm){
+    apptForm.addEventListener('submit', async function(e){
+      e.preventDefault();
+      const btn = apptForm.querySelector('.form-submit');
+      btn.disabled = true;
+      btn.textContent = '送出中…';
+      try {
+        const res = await fetch(apptForm.action, {
+          method: 'POST',
+          body: new FormData(apptForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if(res.ok){
+          document.getElementById('form-success').style.display='block';
+          btn.style.display='none';
+          apptForm.reset();
+        } else {
+          btn.disabled=false;
+          btn.textContent='送出預約申請';
+          alert('送出失敗，請稍後再試或直接來電聯繫。');
+        }
+      } catch(err){
+        btn.disabled=false;
+        btn.textContent='送出預約申請';
+        alert('網路錯誤，請稍後再試。');
+      }
+    });
   }
   window.addEventListener('scroll',()=>{
     const nav=document.querySelector('nav');
